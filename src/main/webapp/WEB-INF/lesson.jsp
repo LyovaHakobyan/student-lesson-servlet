@@ -129,7 +129,7 @@
             <input type="text" name="name" id="name">
         </label>
         <label for="duration">Duration
-            <input type="number" name="duration" placeholder="Taking Place Times" id="duration" min="0">
+            <input type="number" name="duration" placeholder="Taking Place Time" id="duration" min="0">
         </label>
         <label for="lecName">Lecturer Name
             <input type="text" name="lecturerName" id="lecName">
