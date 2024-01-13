@@ -2,6 +2,7 @@ package com.example.servlet;
 
 import com.example.manager.StudentManager;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,8 @@ public class DeleteStudentServlet extends HttpServlet {
         try {
             studentManager.deleteStudentById(id);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/student.jsp");
+            requestDispatcher.forward(req,resp);
         }
         resp.sendRedirect("/students");
     }

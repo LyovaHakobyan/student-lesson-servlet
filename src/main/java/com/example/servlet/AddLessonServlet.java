@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+
 
 @WebServlet(urlPatterns = "/addLesson")
 public class AddLessonServlet extends HttpServlet {
@@ -26,7 +26,8 @@ public class AddLessonServlet extends HttpServlet {
         try {
             lessonManager.addLesson(Lesson.builder().name(name).duration(duration).lecturerName(lecturerName).price(price).build());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/lesson.jsp");
+            requestDispatcher.forward(req,resp);
         }
         resp.sendRedirect("/lessons");
     }

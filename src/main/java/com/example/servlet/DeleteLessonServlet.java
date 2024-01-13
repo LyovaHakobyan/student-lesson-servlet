@@ -3,6 +3,7 @@ package com.example.servlet;
 import com.example.manager.LessonManager;
 import com.example.manager.StudentManager;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,8 @@ public class DeleteLessonServlet extends HttpServlet {
         try {
             lessonManager.deleteLessonById(id);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/lesson.jsp");
+            requestDispatcher.forward(req,resp);
         }
         resp.sendRedirect("/lessons");
     }

@@ -5,6 +5,7 @@ import com.example.manager.StudentManager;
 import com.example.model.Lesson;
 import com.example.model.Student;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,8 @@ public class AddStudentServlet extends HttpServlet {
         try {
             studentManager.addStudent(Student.builder().name(name).surname(surname).email(email).age(age).lesson(lessonById).build());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/student.jsp");
+            requestDispatcher.forward(req,resp);
         }
         resp.sendRedirect("/students");
     }
