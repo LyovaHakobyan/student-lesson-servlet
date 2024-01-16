@@ -98,8 +98,8 @@
 <body>
 
 <%
-    List<Lesson> lessons = (List<Lesson>) request.getAttribute("allLessons");
-    List<Student> students = (List<Student>) request.getAttribute("allStudents");
+    List<Lesson> lessons = (List<Lesson>) session.getAttribute("allLessons");
+    List<Student> students = (List<Student>) session.getAttribute("allStudents");
 %>
 <div class="left">
     <table>
@@ -109,6 +109,7 @@
             <th>Surname</th>
             <th>Email</th>
             <th>Age</th>
+            <th>Image</th>
             <th>Lesson Name</th>
         </tr>
         <%
@@ -125,6 +126,8 @@
             <td><%=student.getEmail()%>
             </td>
             <td><%=student.getAge()%>
+            </td>
+            <td><img src="downloadImg?imgName=<%=student.getImgName()%>" alt="No Img" style="width: 60px;">
             </td>
                 <%if(student.getLesson() != null) {
                 %>
@@ -144,7 +147,7 @@
 </div>
 
 <div class="right">
-    <form action="addStudent" method="post" autocomplete="off">
+    <form action="addStudent" method="post" autocomplete="off" enctype="multipart/form-data">
         <label for="name">Name
             <input type="text" name="name" id="name">
         </label>
@@ -157,12 +160,16 @@
         <label for="age">Age
             <input type="number" name="age" id="age" min="0">
         </label>
+        <label for="img">Image
+            <input type="file" name="img" id="img">
+        </label>
         <label for="lesson">Lesson
             <select name="lessonId" id="lesson">
                 <% if (lessons != null) {
                     for (Lesson lesson : lessons) {
                 %>
-                <option value="<%=lesson.getId()%>"> <%=lesson.getName()%> </option>
+                <option value="<%=lesson.getId()%>"><%=lesson.getName()%>
+                </option>
                 <%
                         }
                     }

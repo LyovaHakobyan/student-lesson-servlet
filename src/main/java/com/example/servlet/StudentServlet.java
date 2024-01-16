@@ -22,8 +22,8 @@ public class StudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Student> allStudents = studentManager.getAllStudents();
         List<Lesson> allLessons = lessonManager.getAllLessons();
-        req.setAttribute("allStudents",allStudents);
-        req.setAttribute("allLessons",allLessons);
+        req.getSession().setAttribute("allStudents",allStudents);
+        req.getSession().setAttribute("allLessons",allLessons);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/student.jsp");
         requestDispatcher.forward(req, resp);
     }

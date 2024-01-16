@@ -12,16 +12,17 @@ public class StudentManager {
     private static final Connection CONNECTION = DBConnectionProvider.getInstance().getConnection();
 
     public void addStudent(Student student) throws SQLException {
-        String query = "INSERT INTO student (name,surname,email,age,lesson_id) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO student (name,surname,email,age,img_name,lesson_id) VALUES (?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = CONNECTION.prepareStatement(query)) {
             preparedStatement.setString(1, student.getName());
             preparedStatement.setString(2, student.getSurname());
             preparedStatement.setString(3, student.getEmail());
             preparedStatement.setInt(4, student.getAge());
+            preparedStatement.setString(5, student.getImgName());
             if (student.getLesson() != null) {
-                preparedStatement.setInt(5, student.getLesson().getId());
+                preparedStatement.setInt(6, student.getLesson().getId());
             } else {
-                preparedStatement.setString(5, null);
+                preparedStatement.setString(6, null);
             }
             preparedStatement.executeUpdate();
         }
@@ -36,9 +37,10 @@ public class StudentManager {
                 String surname = resultSet.getString("surname");
                 String email = resultSet.getString("email");
                 int age = resultSet.getInt("age");
+                String imgName = resultSet.getString("img_name");
                 int lessonId = resultSet.getInt("lesson_id");
                 Lesson lessonById = LessonManager.getLessonById(lessonId);
-                return Student.builder().id(id).name(name).surname(surname).email(email).age(age).lesson(lessonById).build();
+                return Student.builder().id(id).name(name).surname(surname).email(email).age(age).imgName(imgName).lesson(lessonById).build();
             }
             return null;
         } catch (SQLException e) {
@@ -66,7 +68,8 @@ public class StudentManager {
                 int lessonId = resultSet.getInt("lesson_id");
                 Lesson lessonById = LessonManager.getLessonById(lessonId);
                 int age = resultSet.getInt("age");
-                students.add(Student.builder().id(id).name(name).surname(surname).email(email).age(age).lesson(lessonById).build());
+                String imgName = resultSet.getString("img_name");
+                students.add(Student.builder().id(id).name(name).surname(surname).email(email).age(age).imgName(imgName).lesson(lessonById).build());
             }
             return students;
         } catch (SQLException e) {
