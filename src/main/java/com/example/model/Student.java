@@ -17,4 +17,5 @@ public class Student {
     private int age;
     private String imgName;
     private Lesson lesson;
+    private User user;
 }

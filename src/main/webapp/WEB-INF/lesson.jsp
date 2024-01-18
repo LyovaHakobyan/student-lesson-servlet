@@ -124,6 +124,16 @@
 </div>
 
 <div class="right">
+    <%
+        String msg = (String) session.getAttribute("msg");
+        if (msg != null) {
+    %>
+    <p style="color:red; text-align: center; font-size: 20px"><%=msg%>
+    </p>
+    <%
+        }
+        session.removeAttribute("msg");
+    %>
     <form action="addLesson" method="post" autocomplete="off">
         <label for="name">Name
             <input type="text" name="name" id="name">
@@ -139,7 +149,7 @@
         </label>
         <input type="submit" value="Send" class="sbm">
     </form>
-    <p><a href="index" class="ps"><i>Back To Main Menu</i></a></p>
+    <p><a href="home" class="ps"><i>Back to Home</i></a></p>
 </div>
 
 </body>

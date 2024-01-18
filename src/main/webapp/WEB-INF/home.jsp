@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lesson-Student</title>
+    <title>Home</title>
     <style>
         * {
             margin: 0;
@@ -38,7 +38,7 @@
         }
 
         .center button:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
             background-color: green;
             cursor: pointer;
         }
@@ -57,12 +57,12 @@
 
 <div class="title"><h1>Lesson - Student</h1></div>
 <div class="center">
-    <a href="login">
-        <button>LOGIN</button>
+    <a href="lessons">
+        <button>Lessons</button>
     </a>
     <div class="empty"></div>
-    <a href="register">
-        <button class="for">REGISTER</button>
+    <a href="students">
+        <button class="for">Students</button>
     </a>
 </div>
 </body>
