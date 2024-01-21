@@ -27,13 +27,17 @@ public class RegisterServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        try {
-            userManager.addUser(User.builder().name(name).email(email).password(password).build());
-        } catch (SQLException e) {
+        User userByEmail = UserManager.getUserByEmail(email);
+        if (userByEmail == null) {
+            try {
+                userManager.addUser(User.builder().name(name).email(email).password(password).build());
+                resp.sendRedirect("/login");
+            } catch (SQLException e) {
+                resp.sendRedirect("/register");
+            }
+        } else {
             req.getSession().setAttribute("msg", "Account By This Email, Already Exists !");
             resp.sendRedirect("/register");
-            return;
         }
-        resp.sendRedirect("/login");
     }
 }
